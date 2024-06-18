@@ -1,1 +1,27 @@
+name: Docker
 
+on:
+  workflow_call:
+
+jobs:
+
+docker:
+  runs-on: ubuntu-latest
+  steps:
+  uses: actions/checkout@v3
+
+  name: setup Docker Build
+  uses: docker/set-buildx-action@v2.0.0
+     
+  name: Docker Login
+ 
+  uses: docker/login-action@v3.2.0
+  with:
+    # Server address of Docker registry. If not set then will default to Docker Hub
+    registry: # optional
+    # Username used to log against the Docker registry
+    username: alanzit0x
+    # Password or personal access token used to log against the Docker registry
+    password: # optional
+   
+          
