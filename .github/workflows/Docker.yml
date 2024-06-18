@@ -22,6 +22,6 @@ docker:
     # Username used to log against the Docker registry
     username: alanzit0x
     # Password or personal access token used to log against the Docker registry
-    password: # optional
+    password: ${{ secrets.PASSWORD_DOCKER_HUB }}
    
           
