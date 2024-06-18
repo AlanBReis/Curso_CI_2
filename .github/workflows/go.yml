@@ -2,9 +2,9 @@ name: Go
 
 on:
   push:
-    branches: [ "*" ]
+    branches: [ '*' ]
   pull_request:
-    branches: [ "*" ]
+    branches: [ '*' ]
 
 jobs:
 
@@ -16,16 +16,15 @@ jobs:
       USER: root
       PASSWORD: root
       DBNAME: root
-      
     strategy:
       matrix:
         go_version: ['1.18', '1.17', '>=1.18']
-        os: ['ubuntu-latest', 'ubuntu-20.04']  # Atualize o SO aqui
+        os: ['ubuntu-latest', 'ubuntu-18.04']
     steps:
-    - uses: actions/checkout@v4  # Atualize para v4
+    - uses: actions/checkout@v3
 
     - name: Set up Go
-      uses: actions/setup-go@v4  # Atualize para v4
+      uses: actions/setup-go@v3
       with:
         go-version: ${{ matrix.go_version }}
       
@@ -38,14 +37,19 @@ jobs:
     - name: Test
       run: go test -v main_test.go 
       
+  
   build:
     needs: test
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: ['ubuntu-latest', 'ubuntu-20.04']  # Atualize o SO aqui
+        os: ['ubuntu-latest', 'ubuntu-18.04']
     steps:
-    - uses: actions/checkout@v4  # Atualize para v4
-
+    - uses: actions/checkout@v3
     - name: Build
       run: go build -v main.go
+
+  docker:
+    needs: build
+    uses: ./.github/workflows/Docker.yml
+    secrets: inherit
