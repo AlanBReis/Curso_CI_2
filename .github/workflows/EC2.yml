@@ -37,4 +37,5 @@ jobs:
           export USER=${{ secrets.DB_USER }}
           export PASSWORD=${{ secrets.DB_PASSWORD }}
           export DBNAME=${{ secrets.DBNAME }}
-          export PORT=${{ secrets.PORT }}
+          export DBPORT=${{ secrets.DBPORT }}
+          export PORT=8000
